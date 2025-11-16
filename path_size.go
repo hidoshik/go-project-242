@@ -1,25 +1,26 @@
 package goproject242
 
 import (
+	"fmt"
 	"os"
 )
 
-func GetSize(filePath string) (int64, error) {
+func GetSize(filePath string) (string, error) {
 	fileInfo, err := os.Lstat(filePath)
 	if err != nil {
-		return 0, err
+		return "", err
 	}
 
 	if fileInfo.IsDir() {
 		dir, err := os.Open(filePath)
 		if err != nil {
-			return 0, err
+			return "", err
 		}
 		defer dir.Close()
 
 		entries, err := dir.Readdir(-1)
 		if err != nil {
-			return 0, err
+			return "", err
 		}
 
 		var totalSize int64
@@ -28,7 +29,8 @@ func GetSize(filePath string) (int64, error) {
 				totalSize += entry.Size()
 			}
 		}
-		return totalSize, nil
+		return fmt.Sprintf("%d %s", totalSize, filePath), nil
 	}
-	return fileInfo.Size(), nil
+
+	return fmt.Sprintf("%d %s", fileInfo.Size(), filePath), nil
 }
