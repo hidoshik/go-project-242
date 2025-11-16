@@ -17,5 +17,5 @@ func main() {
 	if err := cmd.Run(context.Background(), os.Args); err != nil {
 		log.Fatal(err)
 	}
-	goproject242.GetSize("../go-project-242/Makefile")
+	code.GetSize("../go-project-242/Makefile")
 }
