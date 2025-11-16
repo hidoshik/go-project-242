@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"os"
+	"code"
 
 	"github.com/urfave/cli/v3"
 )
@@ -16,4 +17,5 @@ func main() {
 	if err := cmd.Run(context.Background(), os.Args); err != nil {
 		log.Fatal(err)
 	}
+	goproject242.GetSize("../go-project-242/Makefile")
 }
